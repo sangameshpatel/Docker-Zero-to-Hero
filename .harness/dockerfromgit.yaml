@@ -1,0 +1,38 @@
+pipeline:
+  name: docker-from-git
+  identifier: dockerfromgit
+  projectIdentifier: firstproject
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: githubconnect
+        repoName: Docker-Zero-to-Hero
+        build: <+input>
+  stages:
+    - stage:
+        name: build-push
+        identifier: buildpush
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDocker
+                  identifier: BuildAndPushDocker
+                  spec:
+                    connectorRef: docker_connect
+                    repo: sangameshhub/sample-dockerfile
+                    tags:
+                      - new-image
+                    dockerfile: examples/first-docker-file/Dockerfile
