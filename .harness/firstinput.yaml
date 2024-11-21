@@ -1,0 +1,14 @@
+inputSet:
+  name: first-input
+  identifier: firstinput
+  orgIdentifier: default
+  projectIdentifier: firstproject
+  pipeline:
+    identifier: dockerfromgit
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: main
